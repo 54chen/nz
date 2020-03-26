@@ -120,12 +120,12 @@ Page({
         domain:domain        
     },
     onLoad: function (options) {
-        //Auth.setUserInfoData(this); 
-        //Auth.checkLogin(this);
+        Auth.setUserInfoData(this); 
+        Auth.checkLogin(this);
         wx.setNavigationBarTitle({
             title: '专题'
         });
-        //this.fetchCategoriesData();
+        this.fetchCategoriesData();
         
     },
     onShow:function(){           
