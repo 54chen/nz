@@ -24,6 +24,8 @@
         <view class='common-subtitle-left'>最新数据</view>
         <view class='common-subtitle-right'>
           <rich-text nodes="{{jzsj_date}}"></rich-text>
+        </view>
+      </view>
   <view class="flex-wrp" style="flex-direction:row;">
     <view class="flex-item bc_white" style="width:10px"></view>
     <view class="flex-item bc_white" style="width:100px">
