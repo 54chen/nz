@@ -1,12 +1,12 @@
 {
     "pages": [
-        "pages/index/index",
+        "pages/topic/topic",
         "pages/detail/detail",
         "pages/logs/logs",
         "pages/page/page",
         "pages/about/about",
         "pages/list/list",
-        "pages/topic/topic",
+        "pages/index/index",
         "pages/readlog/readlog",
         "pages/hot/hot",
         "pages/pay/pay",
@@ -15,6 +15,7 @@
         "pages/poster/poster",
         "pages/search/search",
         "pages/map/map"
+
         
     ],
     "window": {
