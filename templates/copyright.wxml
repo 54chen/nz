@@ -1,0 +1,6 @@
+<template name="tempCopyright">
+<view>  
+同心协力，抗击疫情
+<!-- © 2020 {{webSiteName}}   -->
+</view>
+</template>
