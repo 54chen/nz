@@ -20,6 +20,10 @@
 
 <view class="selected-nav" wx:if="{{topNav.length != 0}}">
   <image src="../../images/level4.jpg" style="width:100%;height:67px"></image>
+        <view class='common-subtitle'>
+        <view class='common-subtitle-left'>最新数据</view>
+        <view class='common-subtitle-right'>
+          <rich-text nodes="{{jzsj_date}}"></rich-text>
   <view class="flex-wrp" style="flex-direction:row;">
     <view class="flex-item bc_white" style="width:10px"></view>
     <view class="flex-item bc_white" style="width:100px">

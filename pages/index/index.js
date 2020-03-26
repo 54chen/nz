@@ -20,8 +20,8 @@ import config from '../../utils/config.js'
 var pageCount = config.getPageCount;
 
 var webSiteName = config.getWebsiteName;
-var domain =config.getDomain;
-var topNav=config.getIndexNav;
+var domain = config.getDomain;
+var topNav = config.getIndexNav;
 
 Page({
   data: {
@@ -40,11 +40,21 @@ Page({
     floatDisplay: "none",
     displayfirstSwiper: "none",
     topNav: topNav,
-    listAdsuccess:true,
-    webSiteName:webSiteName,
-    domain:domain,
+    listAdsuccess: true,
+    webSiteName: webSiteName,
+    domain: domain,
     isFirst: false, // 是否第一次打开,
     isLoading: false,
+    jzsj_date: [{
+      name: 'div',
+      attrs: {
+        class: 'div_class',
+      },
+      children: [{
+        type: 'text',
+        text: '0'
+      }]
+    }],
     xcqz_num: [{
       name: 'div',
       attrs: {
@@ -53,7 +63,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '50'
+        text: '0'
       }]
     }],
     xcqz_title: [{
@@ -64,7 +74,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '现存确诊'
+        text: '累计确诊'
       }]
     }],
     xcqz_new: [{
@@ -75,7 +85,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '较昨日+10'
+        text: '较昨日+0'
       }]
     }],
     ljqz_num: [{
@@ -86,7 +96,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '50'
+        text: '0'
       }]
     }],
     ljqz_title: [{
@@ -97,7 +107,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '累计确诊'
+        text: '累计疑似'
       }]
     }],
     ljqz_new: [{
@@ -108,7 +118,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '较昨日+10'
+        text: '较昨日+0'
       }]
     }],
     ljzy_num: [{
@@ -119,7 +129,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '50'
+        text: '0'
       }]
     }],
     ljzy_title: [{
@@ -141,7 +151,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '较昨日+10'
+        text: '较昨日+0'
       }]
     }],
     ljsw_num: [{
@@ -152,7 +162,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '50'
+        text: '0'
       }]
     }],
     ljsw_title: [{
@@ -163,7 +173,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '累计死亡'
+        text: '累计住院'
       }]
     }],
     ljsw_new: [{
@@ -174,7 +184,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '较昨日+10'
+        text: '较昨日+0'
       }]
     }],
   },
@@ -223,7 +233,7 @@ Page({
       isLastPage: false,
       page: 1,
       postsShowSwiperList: [],
-      listAdsuccess:true
+      listAdsuccess: true
 
     });
     this.fetchTopFivePosts();
@@ -246,8 +256,9 @@ Page({
   },
   onLoad: function (options) {
     var self = this;
+    self.fetchTopYQInfo();
     self.fetchTopFivePosts();
-    self.fetchPostsData(self.data);  
+    self.fetchPostsData(self.data);
 
     // 判断用户是不是第一次打开，弹出添加到我的小程序提示
     var isFirstStorage = wx.getStorageSync('isFirst');
@@ -277,17 +288,74 @@ Page({
     wx.setStorageSync('openLinkCount', 0);
 
     var nowDate = new Date();
-    nowDate = nowDate.getFullYear()+"-"+(nowDate.getMonth() + 1)+'-'+nowDate.getDate();
-    nowDate= new Date(nowDate).getTime();   
-    var _openAdLogs =wx.getStorageSync('openAdLogs')|| [];
-    var openAdLogs=[];
-    _openAdLogs.map(function (log) {   
-      if(new Date(log["date"]).getTime() >= nowDate)
-      {
+    nowDate = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + '-' + nowDate.getDate();
+    nowDate = new Date(nowDate).getTime();
+    var _openAdLogs = wx.getStorageSync('openAdLogs') || [];
+    var openAdLogs = [];
+    _openAdLogs.map(function (log) {
+      if (new Date(log["date"]).getTime() >= nowDate) {
         openAdLogs.unshift(log);
       }
-    
+
     })
+  },
+  //获取疫情信息
+  fetchTopYQInfo: function () {
+    var self = this;
+    var getYQInfo = wxRequest.getRequest(Api.getYQInfo());
+    getYQInfo.then(res => {
+      if (res.statusCode == 200 && res.data) {
+
+        var xcqz_num = self.data.xcqz_num;
+        var xcqz_new = self.data.xcqz_new;
+
+        var ljqz_num = self.data.ljqz_num;
+        var ljqz_new = self.data.ljqz_new;
+
+        var ljzy_num = self.data.ljzy_num;
+        var ljzy_new = self.data.ljzy_new;
+
+        var ljsw_num = self.data.ljsw_num;
+        var ljsw_new = self.data.ljsw_new;
+
+        var jzsj = self.data.jzsj_date;
+        jzsj[0].children[0].text = res.data.jzsj.date;
+
+        xcqz_num[0].children[0].text = res.data.xcqz.total;
+        xcqz_new[0].children[0].text = res.data.xcqz.compare;
+
+        ljqz_num[0].children[0].text = res.data.ljqz.total;
+        ljqz_new[0].children[0].text = res.data.ljqz.compare;
+
+        ljzy_num[0].children[0].text = res.data.ljzy.total;
+        ljzy_new[0].children[0].text = res.data.ljzy.compare;
+
+        ljsw_num[0].children[0].text = res.data.ljsw.total;
+        ljsw_new[0].children[0].text = res.data.ljsw.compare;
+
+        self.setData({
+          xcqz_num: xcqz_num,
+          xcqz_new: xcqz_new,
+
+          ljqz_num: ljqz_num,
+          ljqz_new: ljqz_new,
+
+          ljzy_num: ljzy_num,
+          ljzy_new: ljzy_new,
+
+          ljsw_num: ljsw_num,
+          ljsw_new: ljsw_new,
+
+          jzsj_date: jzsj
+        });
+      }
+    }).catch(function (response) {
+      console.log(response);
+
+    }).finally(function () {
+
+    });
+
   },
   //获取分类列表
   fetchCategoriesData: function () {
@@ -382,98 +450,97 @@ Page({
       self.setData({
         postsList: []
       });
-    };    
+    };
     self.setData({ isLoading: true })
     var getCategoriesRequest = wxRequest.getRequest(Api.getCategoriesIds());
-    getCategoriesRequest.then(res=>{
-        if(!res.data.Ids=="")
-        {
-          data.categories=res.data.Ids;
-          self.setData({categories:res.data.Ids})
+    getCategoriesRequest.then(res => {
+      if (!res.data.Ids == "") {
+        data.categories = res.data.Ids;
+        self.setData({ categories: res.data.Ids })
 
-        }
+      }
 
-        var getPostsRequest = wxRequest.getRequest(Api.getPosts(data));
-        getPostsRequest
-          .then(response => {
-            if (response.statusCode === 200) {
-              if (response.data.length) {
-                if (response.data.length < pageCount) {
-                  self.setData({
-                    isLastPage: true,
-                    isLoading: false
-                  });
-                }    
+      var getPostsRequest = wxRequest.getRequest(Api.getPosts(data));
+      getPostsRequest
+        .then(response => {
+          if (response.statusCode === 200) {
+            if (response.data.length) {
+              if (response.data.length < pageCount) {
                 self.setData({
-                  floatDisplay: "block",    
-                  postsList: self.data.postsList.concat(response.data.map(function (item) {
-    
-                    var strdate = item.date
-                    if (item.category_name != null) {
-    
-                      item.categoryImage = "../../images/category.png";
-                    } else {
-                      item.categoryImage = "";
-                    }
-    
-                    if (item.post_medium_image == null || item.post_medium_image == '') {
-                      item.post_medium_image = "../../images/logo700.png";
-                    }
-                    item.date = util.cutstr(strdate, 10, 1);
-                    return item;
-                  })),
-    
+                  isLastPage: true,
+                  isLoading: false
                 });
-                
+              }
+              self.setData({
+                floatDisplay: "block",
+                postsList: self.data.postsList.concat(response.data.map(function (item) {
+
+                  var strdate = item.date
+                  if (item.category_name != null) {
+
+                    item.categoryImage = "../../images/category.png";
+                  } else {
+                    item.categoryImage = "";
+                  }
+
+                  if (item.post_medium_image == null || item.post_medium_image == '') {
+                    item.post_medium_image = "../../images/logo700.png";
+                  }
+                  item.date = util.cutstr(strdate, 10, 1);
+                  return item;
+                })),
+
+              });
+
+            } else {
+              if (response.data.code == "rest_post_invalid_page_number") {
+                self.setData({
+                  isLastPage: true,
+                  isLoading: false
+                });
+                wx.showToast({
+                  title: '没有更多内容',
+                  mask: false,
+                  duration: 1500
+                });
               } else {
-                if (response.data.code == "rest_post_invalid_page_number") {
-                  self.setData({
-                    isLastPage: true,
-                    isLoading: false
-                  });
-                  wx.showToast({
-                    title: '没有更多内容',
-                    mask: false,
-                    duration: 1500
-                  });
-                } else {
-                  wx.showToast({
-                    title: response.data.message,
-                    duration: 1500
-                  })
-                }
+                wx.showToast({
+                  title: response.data.message,
+                  duration: 1500
+                })
               }
             }
-          })
-          .catch(function (response) {
-            if (data.page == 1) {
-    
-              self.setData({
-                showerror: "block",
-                floatDisplay: "none"
-              });
-    
-            } else {
-              wx.showModal({
-                title: '加载失败',
-                content: '加载数据失败,请重试.',
-                showCancel: false,
-              });
-              self.setData({
-                page: data.page - 1
-              });
-            }
-    
-          })
-          .finally(function (response) {
-            wx.hideLoading();
-            self.setData({ isLoading: false })
-            wx.stopPullDownRefresh();
-          });
+          }
+        })
+        .catch(function (response) {
+          if (data.page == 1) {
+
+            self.setData({
+              showerror: "block",
+              floatDisplay: "none"
+            });
+
+          } else {
+            wx.showModal({
+              title: '加载失败',
+              content: '加载数据失败,请重试.',
+              showCancel: false,
+            });
+            self.setData({
+              page: data.page - 1
+            });
+          }
+
+        })
+        .finally(function (response) {
+          wx.hideLoading();
+          self.setData({ isLoading: false })
+          wx.stopPullDownRefresh();
+        });
 
     })
 
-   
+
   },
   //加载分页
   loadMore: function (e) {
@@ -584,11 +651,10 @@ Page({
       url: url
     });
   },
-  adbinderror:function(e)
-  {
-    var self=this;
+  adbinderror: function (e) {
+    var self = this;
     console.log(e.detail.errCode);
-    console.log(e.detail.errMsg);    
+    console.log(e.detail.errMsg);
     if (e.detail.errCode) {
       self.setData({
         listAdsuccess: false
@@ -695,5 +761,5 @@ Page({
       'dialog.title': '',
       'dialog.content': ''
     })
-  } 
+  }
 })
