@@ -45,14 +45,36 @@ Page({
     domain: domain,
     isFirst: false, // 是否第一次打开,
     isLoading: false,
-    jzsj_date: [{
+    showView: false,
+    jzsj_num: [{
       name: 'div',
       attrs: {
-        class: 'div_class',
+        class: 'div_class'       
       },
       children: [{
         type: 'text',
-        text: '0'
+        text: 'no'
+      }]
+    }],
+    jzsj_new: [{
+      name: 'div',
+      attrs: {
+        class: 'div_class'
+      },
+      children: [{
+        type: 'text',
+        text: '截至：26/3/2020'
+      }]
+    }],
+    xcqz_new: [{
+      name: 'div',
+      attrs: {
+        class: 'div_class',
+        style: 'font-family:verdana; font-size:12px; color: grey;text-align:center;'
+      },
+      children: [{
+        type: 'text',
+        text: '较昨日+0'
       }]
     }],
     xcqz_num: [{
@@ -260,6 +282,7 @@ Page({
     self.fetchTopFivePosts();
     self.fetchPostsData(self.data);
 
+
     // 判断用户是不是第一次打开，弹出添加到我的小程序提示
     var isFirstStorage = wx.getStorageSync('isFirst');
     // console.log(isFirstStorage);
@@ -283,6 +306,13 @@ Page({
 
     this.fetchCategoriesData();
 
+    
+  },
+  onChangeShowState: function () {
+    var that = this;
+    that.setData({
+      showView: (!that.data.showView)
+    })
   },
   onShow: function (options) {
     wx.setStorageSync('openLinkCount', 0);
@@ -318,8 +348,9 @@ Page({
         var ljsw_num = self.data.ljsw_num;
         var ljsw_new = self.data.ljsw_new;
 
-        var jzsj = self.data.jzsj_date;
-        jzsj[0].children[0].text = res.data.jzsj.date;
+        var jzsj_num = self.data.jzsj_num;
+        var jzsj_new = self.data.jzsj_new;
+
 
         xcqz_num[0].children[0].text = res.data.xcqz.total;
         xcqz_new[0].children[0].text = res.data.xcqz.compare;
@@ -333,6 +364,15 @@ Page({
         ljsw_num[0].children[0].text = res.data.ljsw.total;
         ljsw_new[0].children[0].text = res.data.ljsw.compare;
 
+        jzsj_num[0].children[0].text = res.data.jzsj.total;
+        jzsj_new[0].children[0].text = res.data.jzsj.compare;
+
+
+        if (jzsj_num[0].children[0].text == 0){
+          this.setData({
+            showView:true
+          });
+        }
         self.setData({
           xcqz_num: xcqz_num,
           xcqz_new: xcqz_new,
@@ -346,7 +386,9 @@ Page({
           ljsw_num: ljsw_num,
           ljsw_new: ljsw_new,
 
-          jzsj_date: jzsj
+          jzsj_num: jzsj_num,
+          jzsj_new: jzsj_new,
+
         });
       }
     }).catch(function (response) {

@@ -215,3 +215,15 @@ font-weight: 500;
   top: -10rpx;
 }
 
+.bright789_view_hide{
+ display: none;
+}
+.bright789_view_show{
+ display: block;
+}
+
+.bright789-text{
+ font-size: 40rpx;
+ line-height: 40px;
+ color: #ff0000;
+}
