@@ -301,7 +301,7 @@ Page({
     Auth.setUserInfoData(this);
     Auth.checkLogin(this);
     wx.setNavigationBarTitle({
-      title: '新西兰华人防疫信息平台'
+      title: '新西兰华人信息平台'
     });
 
     this.fetchCategoriesData();
@@ -367,12 +367,17 @@ Page({
         jzsj_num[0].children[0].text = res.data.jzsj.total;
         jzsj_new[0].children[0].text = res.data.jzsj.compare;
 
-
+        console.log("当前后台开关是：" + jzsj_num[0].children[0].text);
+        console.log("1当前前台开关是：" + res.data.showView);
+        
         if (jzsj_num[0].children[0].text == 0){
+          console.log("打开")
           this.setData({
             showView:true
           });
         }
+        console.log("2当前前台开关是：" + res.data.showView);
+
         self.setData({
           xcqz_num: xcqz_num,
           xcqz_new: xcqz_new,

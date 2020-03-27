@@ -1,2 +1,16 @@
-<!--pages/map/map.wxml-->
-<web-view src="https://wp.wetopay.com/map.html"></web-view>
+<import src="../../templates/copyright.wxml" />
+<import src="../../templates/login-popup.wxml" />
+
+
+<view class="container2">
+  <ec-canvas id="mychart-dom-area" canvas-id="mychart-area" ec="{{ ec }}"></ec-canvas>
+</view>
+
+
+<!-- 未登录时弹出的登录框 -->
+<template is="login-popup" data="{{show: isLoginPopup, userInfo: userInfo}}"></template>
+
+<!-- 版权信息 -->
+<view class="copyright" style="display:{{floatDisplay}}">
+   <template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}"/>
+</view>

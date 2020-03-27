@@ -1,11 +1,6 @@
 <import src="../../templates/copyright.wxml" />
 <import src="../../templates/login-popup.wxml" />
 
-
-<view class="container2">
-  <ec-canvas id="mychart-dom-area" canvas-id="mychart-area" ec="{{ ec }}"></ec-canvas>
-</view>
-
 <view class="topic-list clearfix">
   <block wx:key="id" wx:for="{{categoriesList}}">
     <view class="list-item">

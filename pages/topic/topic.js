@@ -9,10 +9,6 @@
  * 
  *  *Copyright (c) 2017 https://www.watch-life.net All rights reserved.
  */
-import * as echarts from '../../ec-canvas/echarts';
-import geoJson from './nn.js';
-
-
 import config from '../../utils/config.js'
 var Api = require('../../utils/api.js');
 var util = require('../../utils/util.js');
@@ -22,102 +18,16 @@ var wxApi = require('../../utils/wxApi.js')
 var wxRequest = require('../../utils/wxRequest.js');
 var webSiteName= config.getWebsiteName;
 var domain =config.getDomain
-const app = getApp();
-
- 
-function initChart(canvas, width, height, dpr) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-
-  echarts.registerMap('nz', geoJson);
-
-  const option = {
-    tooltip: {
-      trigger: 'item',
-      formatter: '{b}: {c}'
-    },
-
-    visualMap: {
-      min: 0,
-      max: 300,
-      left: 'left',
-      top: 'bottom',
-      text: ['高', '低'], // 文本，默认为数值文本
-      calculable: true
-    },
-    toolbox: {
-      show: false,
-      orient: 'vertical',
-      left: 'right',
-      top: 'center',
-      feature: {
-        dataView: { readOnly: false },
-        restore: {},
-        saveAsImage: {}
-      }
-    },
-    series: [{
-      type: 'map',
-      mapType: 'nz',
-      label: {
-        normal: {
-          show: true
-        },
-        emphasis: {
-          textStyle: {
-            color: '#fff'
-          }
-        }
-      },
-      itemStyle: {
-
-        normal: {
-          borderColor: '#389BB7',
-          areaColor: '#fff',
-        },
-        emphasis: {
-          areaColor: '#389BB7',
-          borderWidth: 0
-        }
-      },
-      animation: false,
-
-      data: [
-        { name: 'Auckland', value: 100 },
-        { name: 'Otago', value: 10 },
-        { name: 'Waikato', value: 30 },
-        { name: 'Northland', value: 10 },
-        { name: 'Taranaki', value: 10 },
-        { name: 'West Coast', value: 10 },
-        
-      ]
-
-    }],
-
-  };
-
-  chart.setOption(option);
-
-  return chart;
-}
-
- 
+var app = getApp();
 Page({
     data: {
-        ec: {
-            onInit: initChart
-          },
         text: "Page topic",
         categoriesList: {},
         floatDisplay: "none",
         openid:"",
         userInfo:{},
         webSiteName:webSiteName,
-        domain:domain        
+    domain:domain        
     },
     onLoad: function (options) {
         Auth.setUserInfoData(this); 
@@ -125,12 +35,13 @@ Page({
         wx.setNavigationBarTitle({
             title: '专题'
         });
+        
         this.fetchCategoriesData();
         
     },
-    onShow:function(){           
+    onShow:function(){            
+
     },
-     
     //获取分类列表
     fetchCategoriesData: function () {
         var self = this;        
