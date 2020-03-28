@@ -23,5 +23,5 @@ for k, v in data.items():
         result.append({'name': k, 'value': v})
 
 
-print json.dumps(result)
-
+with open('data.json', 'w') as outfile:
+        json.dump(result, outfile)
