@@ -301,7 +301,7 @@ Page({
     Auth.setUserInfoData(this);
     Auth.checkLogin(this);
     wx.setNavigationBarTitle({
-      title: '新西兰华人互助信息平台'
+      title: '新西兰华人信息平台'
     });
 
     this.fetchCategoriesData();

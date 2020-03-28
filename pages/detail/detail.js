@@ -302,9 +302,9 @@ Page({
     var praiseWord=self.data.detail.praiseWord;
     if (enterpriseMinapp == "1" && system == 'Android') {
       if (self.data.openid) {
-        wx.navigateTo({
-          url: '../pay/pay?flag=1&openid=' + self.data.openid + '&postid=' + self.data.postID+'&praiseWord='+praiseWord
-        })
+        // wx.navigateTo({
+        //   url: '../pay/pay?flag=1&openid=' + self.data.openid + '&postid=' + self.data.postID+'&praiseWord='+praiseWord
+        // })
       }
       else {
         Auth.checkSession(self, 'isLoginNow');

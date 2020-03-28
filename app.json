@@ -10,7 +10,6 @@
     "pages/list/list",
     "pages/readlog/readlog",
     "pages/hot/hot",
-    "pages/pay/pay",
     "pages/webpage/webpage",
     "pages/comments/comments",
     "pages/poster/poster",
@@ -19,7 +18,7 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#ec3238",
-    "navigationBarTitleText": "新西兰华人互助信息平台 ",
+    "navigationBarTitleText": "新西兰华人信息平台 ",
     "navigationBarTextStyle": "white",
     "pageOrientation": "auto"
   },
