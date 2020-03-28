@@ -37,12 +37,7 @@
         "selectedIconPath": "images/icon-home-on.png",
         "iconPath": "images/icon-home-off.png"
       },
-      {
-        "pagePath": "pages/map/map",
-        "text": "地图",
-        "selectedIconPath": "images/icon-map-on.png",
-        "iconPath": "images/icon-map-off.png"
-      },
+      
       {
         "pagePath": "pages/readlog/readlog",
         "text": "我的",
