@@ -21,7 +21,12 @@ var HOST_URI_WATCH_LIFE_JSON = 'https://' + domain + '/wp-json/watch-life-net/v1
 module.exports = {
   //获取疫情信息
   getYQInfo: function () {
-    var url = 'https://' + domain + '/nzcovid/YQInfo.json'
+    var url = 'https://' + domain + '/nzcovid/YQInfo.json';
+    return url;
+  },
+  //获取疫情信息2
+  getYQInfo2: function () {
+    var url = 'https://' + domain + '/data.json';
     return url;
   },
   // 获取文章列表数据

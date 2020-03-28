@@ -23,9 +23,20 @@ var wxRequest = require('../../utils/wxRequest.js');
 var webSiteName = config.getWebsiteName;
 var domain = config.getDomain
 const app = getApp();
-
-
-function initChart(canvas, width, height, dpr) {
+ 
+function fetchTopYQInfo2 (canvas, width, height, dpr,yQdata) {
+  if(yQdata!=null)  return [ { name: 'Auckland', value: 1 }  ];
+  var YQ = wxRequest.getRequest(Api.getYQInfo2());
+  
+  YQ.then(res=>{
+    if (res.statusCode == 200 && res.data) {
+    initChart(canvas, width, height, dpr,res.data)
+    return res.data;
+  }
+  });
+  return [ { name: 'Auckland', value: 1 }  ];
+  };
+function initChart(canvas, width, height, dpr, yQdata) {
   const chart = echarts.init(canvas, null, {
     width: width,
     height: height,
@@ -34,6 +45,8 @@ function initChart(canvas, width, height, dpr) {
   canvas.setChart(chart);
 
   echarts.registerMap('nz', geoJson);
+  const data = yQdata==null?fetchTopYQInfo2(canvas, width, height, dpr,null):yQdata;
+ 
 
   const option = {
     tooltip: {
@@ -42,8 +55,8 @@ function initChart(canvas, width, height, dpr) {
     },
 
     visualMap: {
-      min: 0,
-      max: 300,
+      min: 1,
+      max: 100,
       left: 'left',
       top: 'bottom',
       text: ['高', '低'], // 文本，默认为数值文本
@@ -65,7 +78,7 @@ function initChart(canvas, width, height, dpr) {
       mapType: 'nz',
       label: {
         normal: {
-          show: true
+          show: false
         },
         emphasis: {
           textStyle: {
@@ -86,22 +99,14 @@ function initChart(canvas, width, height, dpr) {
       },
       animation: false,
 
-      data: [
-        { name: 'Auckland', value: 100 },
-        { name: 'Otago', value: 10 },
-        { name: 'Waikato', value: 30 },
-        { name: 'Northland', value: 10 },
-        { name: 'Taranaki', value: 10 },
-        { name: 'West Coast', value: 10 },
-
-      ]
+      data: data
 
     }],
 
   };
 
   chart.setOption(option);
-
+  
   return chart;
 }
 
@@ -118,6 +123,8 @@ Page({
     userInfo: {},
     webSiteName: webSiteName,
     domain: domain
+  },
+  onReady: function(){
   },
   onLoad: function (options) {
 
