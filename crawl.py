@@ -23,5 +23,5 @@ for k, v in data.items():
         result.append({'name': k, 'value': v})
 
 
-with open('data.json', 'w') as outfile:
+with open('./wp.wetopay.com/data.json', 'w') as outfile:
         json.dump(result, outfile)
