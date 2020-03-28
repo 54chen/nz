@@ -304,9 +304,9 @@
                     <view>
                       <image src="../../images/appreciation.png" catchtap="praise" class="img-menu"></image>
                     </view>
-                    <view>
+                    <!-- <view>
                       <text>{{detail.praiseWord}}</text>
-                    </view>
+                    </view> -->
 
                   </view>
                 </view>
