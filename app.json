@@ -1,8 +1,7 @@
 {
   "pages": [
-    "pages/map/map",
     "pages/index/index",
-    
+    "pages/map/map",
     "pages/topic/topic",
     "pages/detail/detail",
     "pages/logs/logs",
@@ -20,7 +19,7 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#ec3238",
-    "navigationBarTitleText": "新西兰华人信息平台 ",
+    "navigationBarTitleText": "新西兰华人互助信息平台 ",
     "navigationBarTextStyle": "white",
     "pageOrientation": "auto"
   },
@@ -29,6 +28,31 @@
     "connectSocket": 10000,
     "uploadFile": 10000,
     "downloadFile": 10000
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "selectedIconPath": "images/icon-home-on.png",
+        "iconPath": "images/icon-home-off.png"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "text": "地图",
+        "selectedIconPath": "images/icon-map-on.png",
+        "iconPath": "images/icon-map-off.png"
+      },
+      {
+        "pagePath": "pages/readlog/readlog",
+        "text": "我的",
+        "selectedIconPath": "images/icon-me-on.png",
+        "iconPath": "images/icon-me-off.png"
+      }
+    ],
+    "borderStyle": "white",
+    "color": "#dbdbdb",
+    "selectedColor": "#ec3238"
   },
   "navigateToMiniProgramAppIdList": [
     "wxa43aaa8416cdbd61",
