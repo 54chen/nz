@@ -12,10 +12,7 @@
 
 <template name="tempHeader">
   <view class="header">
-    <image src="../../images/logo.png" style="height:200rpx;width:400rpx"></image>
-    <view style='margin-top:40rpx'>
-      同心协力，抗击疫情。
-    </view>
+    <image src="../../images/logo700.png" style="height:302rpx;width:302rpx"></image>
   </view>
 </template>
 <!-- header end -->
