@@ -195,7 +195,7 @@ Page({
       },
       children: [{
         type: 'text',
-        text: '累计住院'
+        text: '累计死亡'
       }]
     }],
     ljsw_new: [{
