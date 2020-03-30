@@ -46,6 +46,8 @@ Page({
     isFirst: false, // 是否第一次打开,
     isLoading: false,
     showView: false,
+    showTitle:"新西兰华人信息平台",
+
     jzsj_num: [{
       name: 'div',
       attrs: {
@@ -64,6 +66,17 @@ Page({
       children: [{
         type: 'text',
         text: '截至：26/3/2020'
+      }]
+    }],
+    jzsj_title: [{
+      name: 'div',
+      attrs: {
+        class: 'div_class',
+        style: 'font-family:verdana; font-size:16px; color: black;text-align:center;'
+      },
+      children: [{
+        type: 'text',
+        text: '新西兰华人防疫互助平台'
       }]
     }],
     xcqz_new: [{
@@ -300,9 +313,13 @@ Page({
     }
     Auth.setUserInfoData(this);
     Auth.checkLogin(this);
+    // console.log("设置title前的title："+self.data.showTitle);
+
     wx.setNavigationBarTitle({
-      title: '新西兰华人信息平台'
-    });
+      title: self.data.showTitle
+    })
+    // console.log("设置title后的title：" + self.data.showTitle);
+
 
     this.fetchCategoriesData();
 
@@ -337,34 +354,44 @@ Page({
       if (res.statusCode == 200 && res.data) {
 
         var xcqz_num = self.data.xcqz_num;
+        var xcqz_title = self.data.xcqz_title;
         var xcqz_new = self.data.xcqz_new;
 
         var ljqz_num = self.data.ljqz_num;
+        var ljqz_title = self.data.ljqz_title;
         var ljqz_new = self.data.ljqz_new;
 
         var ljzy_num = self.data.ljzy_num;
+        var ljzy_title = self.data.ljzy_title;
         var ljzy_new = self.data.ljzy_new;
 
         var ljsw_num = self.data.ljsw_num;
+        var ljsw_title = self.data.ljsw_title;
         var ljsw_new = self.data.ljsw_new;
 
         var jzsj_num = self.data.jzsj_num;
+        var jzsj_title = self.data.jzsj_title;
         var jzsj_new = self.data.jzsj_new;
 
 
         xcqz_num[0].children[0].text = res.data.xcqz.total;
+        xcqz_title[0].children[0].text = res.data.xcqz.title;
         xcqz_new[0].children[0].text = res.data.xcqz.compare;
 
         ljqz_num[0].children[0].text = res.data.ljqz.total;
+        ljqz_title[0].children[0].text = res.data.ljqz.title;
         ljqz_new[0].children[0].text = res.data.ljqz.compare;
 
         ljzy_num[0].children[0].text = res.data.ljzy.total;
+        ljzy_title[0].children[0].text = res.data.ljzy.title;
         ljzy_new[0].children[0].text = res.data.ljzy.compare;
 
         ljsw_num[0].children[0].text = res.data.ljsw.total;
+        ljsw_title[0].children[0].text = res.data.ljsw.title;
         ljsw_new[0].children[0].text = res.data.ljsw.compare;
 
         jzsj_num[0].children[0].text = res.data.jzsj.total;
+        jzsj_title[0].children[0].text = res.data.jzsj.title;
         jzsj_new[0].children[0].text = res.data.jzsj.compare;
 
         // console.log("当前后台开关是：" + jzsj_num[0].children[0].text);
@@ -372,27 +399,39 @@ Page({
         
         if (jzsj_num[0].children[0].text == 0){
           // console.log("打开")
+          // console.log("后台平台title：" + jzsj_title[0].children[0].text);
           this.setData({
-            showView:true
+            showView:true,
+            showTitle: jzsj_title[0].children[0].text
           });
+          // console.log("后台平台title设置showTitle,showTitle：" + self.data.showTitle);
+          wx.setNavigationBarTitle({
+            title: self.data.showTitle,
+          })
         }
         // console.log("2当前前台开关是：" + res.data.showView);
 
         self.setData({
           xcqz_num: xcqz_num,
+          xcqz_title: xcqz_title,
           xcqz_new: xcqz_new,
 
           ljqz_num: ljqz_num,
+          ljqz_title: ljqz_title,
           ljqz_new: ljqz_new,
 
           ljzy_num: ljzy_num,
+          ljzy_title: ljzy_title,
           ljzy_new: ljzy_new,
 
           ljsw_num: ljsw_num,
+          ljsw_title: ljsw_title,
           ljsw_new: ljsw_new,
 
           jzsj_num: jzsj_num,
+          jzsj_title: jzsj_title,
           jzsj_new: jzsj_new,
+          showTitle:jzsj_title,
 
         });
       }
