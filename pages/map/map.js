@@ -8,10 +8,7 @@
  * 开源协议：MIT
  * 
  *  *Copyright (c) 2017 https://www.watch-life.net All rights reserved.
- */
-import * as echarts from '../../ec-canvas/echarts';
-import geoJson from './nn.js';
-
+ */ 
 
 import config from '../../utils/config.js'
 var Api = require('../../utils/api.js');
@@ -113,9 +110,7 @@ function initChart(canvas, width, height, dpr, yQdata) {
 
 Page({
   data: {
-    ec: {
-      onInit: initChart
-    },
+     
     text: "map",
     categoriesList: {},
     floatDisplay: "none",

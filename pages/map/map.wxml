@@ -1,10 +1,28 @@
 <import src="../../templates/copyright.wxml" />
 <import src="../../templates/login-popup.wxml" />
 
-
-<view class="container2">
-  <ec-canvas id="mychart-dom-area" canvas-id="mychart-area" ec="{{ ec }}"></ec-canvas>
+ <view>
+              <image src="https://wp.wetopay.com/map/covid.jpg" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
 </view>
+<view>
+              <image src="https://wp.wetopay.com/map/6.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+</view>
+<view>
+              <image src="https://wp.wetopay.com/map/1.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+</view>
+<view>
+              <image src="https://wp.wetopay.com/map/2.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+</view>
+<view>
+              <image src="https://wp.wetopay.com/map/3.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+</view>
+<view>
+              <image src="https://wp.wetopay.com/map/4.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+</view>
+<view>
+              <image src="https://wp.wetopay.com/map/5.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+</view>
+
 
 
 <!-- 未登录时弹出的登录框 -->
