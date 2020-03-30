@@ -67,9 +67,9 @@ Page({
       var postid=self.data.pageData.id;
       if (enterpriseMinapp == "1"  && system=='Android') {
           if (self.data.openid) {
-              wx.navigateTo({
-                  url: '../pay/pay?flag=2&openid=' + self.data.openid + '&postid=' + postid +'&praiseWord='+praiseWord
-              })
+              // wx.navigateTo({
+              //     url: '../pay/pay?flag=2&openid=' + self.data.openid + '&postid=' + postid +'&praiseWord='+praiseWord
+              // })
           }
           else {
                 Auth.checkSession(self,'isLoginNow');

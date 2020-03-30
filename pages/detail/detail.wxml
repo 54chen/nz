@@ -283,14 +283,14 @@
                       <text>海报</text>
                     </view>
                   </view>
-                  <view style="width:20%; float:left; text-align:center">
+                  <!-- <view style="width:20%; float:left; text-align:center">
                     <view>
                       <image src="../../images/copy.png" class="img-menu" catchtap="gotowebpage"></image>
                     </view>
                     <view>
                       <text>阅读原文</text>
                     </view>
-                  </view>
+                  </view> -->
 
                   <view style="width:20%; float:left; text-align:center">
                     <view>
@@ -300,7 +300,7 @@
                       <text>点赞</text>
                     </view>
                   </view>
-                  <view style="width:20%; float:left; ">
+                  <!-- <view style="width:20%; float:left; ">
                     <view>
                       <image src="../../images/appreciation.png" catchtap="praise" class="img-menu"></image>
                     </view>
@@ -308,7 +308,7 @@
                       <text>{{detail.praiseWord}}</text>
                     </view>
 
-                  </view>
+                  </view> -->
                 </view>
               </view>
             </view>
