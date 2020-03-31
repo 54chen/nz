@@ -37,7 +37,12 @@
         "selectedIconPath": "images/icon-home-on.png",
         "iconPath": "images/icon-home-off.png"
       },
-      
+      {
+        "pagePath": "pages/map/map",
+        "text": "数据",
+        "selectedIconPath": "images/icon-data-on.png",
+        "iconPath": "images/icon-data-off.png"
+      },
       {
         "pagePath": "pages/readlog/readlog",
         "text": "我的",

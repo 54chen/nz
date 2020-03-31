@@ -1,27 +1,66 @@
 <import src="../../templates/copyright.wxml" />
 <import src="../../templates/login-popup.wxml" />
 
- <view>
-              <image src="https://wp.wetopay.com/map/covid.jpg" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+
+<view class="swiper-tab gd-tab">
+  <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">疫情地图</view>
+  <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">1</view>
+  <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">2</view>
+
+<view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">3</view>
+
+<view class="swiper-tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="clickTab">4</view>
+
+<view class="swiper-tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="clickTab">5</view>
+
+<view class="swiper-tab-item {{currentTab==6?'active':''}}" data-current="6" bindtap="clickTab">6</view>
+</view>
+<swiper current="{{currentTab}}" duration="300" bindchange="swiperTab" style='padding-top:40px;'>
+  <swiper-item>
+    <image src="https://wp.wetopay.com/map/covid.jpg" mode="aspectFill" style="width:100%"></image>
+  </swiper-item>
+  <swiper-item>
+    1
+  </swiper-item>
+  <swiper-item>
+    2
+  </swiper-item>
+  <swiper-item>
+    3
+  </swiper-item>
+  <swiper-item>
+    4
+  </swiper-item>
+  <swiper-item>
+    5
+  </swiper-item>
+  <swiper-item>
+    6
+  </swiper-item>
+
+</swiper>
+
+<!-- <view>
+  <image src="https://wp.wetopay.com/map/covid.jpg" class="topic-img" bindtap="redictIndex" mode="aspectFill"></image>
 </view>
 <view>
-              <image src="https://wp.wetopay.com/map/6.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+  <image src="https://wp.wetopay.com/map/6.png" class="topic-img" bindtap="redictIndex" mode="aspectFill"></image>
 </view>
 <view>
-              <image src="https://wp.wetopay.com/map/1.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+  <image src="https://wp.wetopay.com/map/1.png" class="topic-img" bindtap="redictIndex" mode="aspectFill"></image>
 </view>
 <view>
-              <image src="https://wp.wetopay.com/map/2.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+  <image src="https://wp.wetopay.com/map/2.png" class="topic-img" bindtap="redictIndex" mode="aspectFill"></image>
 </view>
 <view>
-              <image src="https://wp.wetopay.com/map/3.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+  <image src="https://wp.wetopay.com/map/3.png" class="topic-img" bindtap="redictIndex" mode="aspectFill"></image>
 </view>
 <view>
-              <image src="https://wp.wetopay.com/map/4.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
+  <image src="https://wp.wetopay.com/map/4.png" class="topic-img" bindtap="redictIndex" mode="aspectFill"></image>
 </view>
 <view>
-              <image src="https://wp.wetopay.com/map/5.png" class="topic-img"  bindtap="redictIndex" mode="aspectFill"></image>
-</view>
+  <image src="https://wp.wetopay.com/map/5.png" class="topic-img" bindtap="redictIndex" mode="aspectFill"></image>
+</view> -->
 
 
 
@@ -30,5 +69,5 @@
 
 <!-- 版权信息 -->
 <view class="copyright" style="display:{{floatDisplay}}">
-   <template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}"/>
+  <template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
 </view>
