@@ -48,5 +48,5 @@ def get_pic():
                 print(pic_file);
             download_file(pic_file,str(i)+'.png');
  
-#get_excel();
+get_excel();
 get_pic();
