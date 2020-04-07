@@ -216,6 +216,7 @@ module.exports = {
   updatePageviews(id) {
     var url = HOST_URI_WATCH_LIFE_JSON;
     url += "post/addpageview/" + id;
+    console.log("updatePageviews:"+url);
     return url;
   },
   //获取用户openid

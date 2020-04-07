@@ -107,6 +107,7 @@ Page({
     self.fetchDetailData(options.id);
     Auth.setUserInfoData(self);
     Auth.checkLogin(self);
+    Api.updatePageviews(options.id);
     wx.getSystemInfo({
       success: function(t) {
         var system = t.system.indexOf('iOS') != -1 ? 'iOS' : 'Android';
@@ -1027,7 +1028,7 @@ Page({
   creatArticlePoster: function(appPage, api, util, modalView, poster) {
     var postId = appPage.data.detail.id;
     var title = appPage.data.detail.title.rendered;
-    
+    console.log(JSON.stringify(appPage.data.detail));
     var excerpt = appPage.data.detail.excerpt.rendered ? appPage.data.detail.excerpt.rendered : '';
     if (excerpt && excerpt.length != 0 && excerpt != '') {
       excerpt = util.removeHTML(excerpt);

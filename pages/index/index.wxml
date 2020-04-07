@@ -14,106 +14,95 @@
 
 <!-- 首次进入引导添加到“我的小程序” -->
 <view class="addMyMiniapp" wx:if="{{isFirst}}" catchtap="shutAddMyMiniapp">
-  <view>点击收藏小程序 ↑</view>
-  <text>及时准确掌握新西兰疫情信息</text>
+	<view>点击收藏小程序 ↑</view>
+	<text>及时准确掌握新西兰疫情信息</text>
 </view>
 
 <view class="bright789_view_hide{{showView?'bright789_view_show':''}}">
-  <image src="../../images/level4.jpg" style="width:100%;height:67px"></image>
-  <view class='common-subtitle'>
-    <view class='common-subtitle-left'>最新数据</view>
-    <view class='common-subtitle-right'>
-      <rich-text nodes="{{jzsj_num}}"></rich-text>
-      <rich-text nodes="{{jzsj_new}}"></rich-text>
-    </view>
-  </view>
-  <view class="flex-wrp" style="flex-direction:row;">
-    <view class="flex-item bc_white" style="width:10px"></view>
-    <view class="flex-item bc_white" style="width:100px">
-      <rich-text nodes="{{xcqz_num}}"></rich-text>
-      <rich-text nodes="{{xcqz_title}}"></rich-text>
-      <rich-text nodes="{{xcqz_new}}"></rich-text>
-    </view>
-    <view class="flex-item bc_grey" style="width:2px;height:70px"></view>
-    <view class="flex-item bc_white" style="width:100px">
-      <rich-text nodes="{{ljqz_num}}"></rich-text>
-      <rich-text nodes="{{ljqz_title}}"></rich-text>
-      <rich-text nodes="{{ljqz_new}}"></rich-text>
-    </view>
-    <view class="flex-item bc_grey" style="width:2px;height:70px"></view>
-    <view class="flex-item bc_white" style="width:100px">
-      <rich-text nodes="{{ljzy_num}}"></rich-text>
-      <rich-text nodes="{{ljzy_title}}"></rich-text>
-      <rich-text nodes="{{ljzy_new}}"></rich-text>
-    </view>
-    <view class="flex-item bc_grey" style="width:2px;height:70px"></view>
-    <view class="flex-item bc_white" style="width:100px">
-      <rich-text nodes="{{ljsw_num}}"></rich-text>
-      <rich-text nodes="{{ljsw_title}}"></rich-text>
-      <rich-text nodes="{{ljsw_new}}"></rich-text>
-    </view>
-  </view>
+	<image src="../../images/level4.jpg" style="width:100%;height:67px"></image>
+	<view class='common-subtitle'>
+		<view class='common-subtitle-left'>最新数据</view>
+		<view class='common-subtitle-right'>
+			<rich-text nodes="{{jzsj_num}}"></rich-text>
+			<rich-text nodes="{{jzsj_new}}"></rich-text>
+		</view>
+	</view>
+	<view class="flex-wrp" style="flex-direction:row;">
+		<view class="flex-item bc_white" style="width:10px"></view>
+		<view class="flex-item bc_white" style="width:100px">
+			<rich-text nodes="{{xcqz_num}}"></rich-text>
+			<rich-text nodes="{{xcqz_title}}"></rich-text>
+			<rich-text nodes="{{xcqz_new}}"></rich-text>
+		</view>
+		<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
+		<view class="flex-item bc_white" style="width:100px">
+			<rich-text nodes="{{ljqz_num}}"></rich-text>
+			<rich-text nodes="{{ljqz_title}}"></rich-text>
+			<rich-text nodes="{{ljqz_new}}"></rich-text>
+		</view>
+		<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
+		<view class="flex-item bc_white" style="width:100px">
+			<rich-text nodes="{{ljzy_num}}"></rich-text>
+			<rich-text nodes="{{ljzy_title}}"></rich-text>
+			<rich-text nodes="{{ljzy_new}}"></rich-text>
+		</view>
+		<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
+		<view class="flex-item bc_white" style="width:100px">
+			<rich-text nodes="{{ljsw_num}}"></rich-text>
+			<rich-text nodes="{{ljsw_title}}"></rich-text>
+			<rich-text nodes="{{ljsw_new}}"></rich-text>
+		</view>
+	</view>
 </view>
 <view style="display:{{showallDisplay}}">
-  <!-- 图标导航和搜索 -->
-  <view style="display:{{floatDisplay}}">
-
-    <!-- 精选栏目 -->
-    <view  class="bright789_view_hide{{showView?'bright789_view_show':''}}">
-      <!-- <view class='common-subtitle'>
-        <view class='common-subtitle-left'>专题栏目</view>
-        <view class='common-subtitle-right'>同心协力，抗击疫情。</view>
-      </view> -->
-      <!-- 专题栏目 -->
-      <view class="nav-box">
-
-        <block wx:for="{{categoriesList}}" wx:key="id">
-          <view class="nav-item" catchtap="onNavRedirect" id="{{item.id}}" data-redicttype="{{item.redirecttype}}" data-url="{{item.url}}" data-appid="{{item.appid}}" data-extraData="{{item.extraData}}">
-            <view>
-              <image src="{{item.category_thumbnail_image}}" class="topic-img" data-item="{{item.name}}" data-id="{{item.id}}" bindtap="redictIndex" mode="aspectFill"></image>
-            </view>
-            <view>
-              <text>{{item.name}}</text>
-            </view>
-          </view>
-        </block>
-
-      </view>
-
-    </view>
 
 
+	<view class="container">
 
 
+		<view class="swiper-tab gd-tab">
+			<view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">地图</view>
+			<view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">地区</view>
+			<view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">流行</view>
 
-    <!-- 搜索 -->
-    <form catchsubmit="formSubmit" catchreset="formReset" id="search-form">
-      <view class="search-box">
-        <input value="" id="search-input" name="input" confirm-type="search" class="search-input" placeholder="搜索你感兴趣的内容..." bindconfirm="formSubmit"></input>
-        <button class="search-button" form-type="submit" size="mini" plain="true">
-          <icon type="search" color="#959595" size="16" />
-        </button>
-      </view>
-    </form>
+			<view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">新增</view>
 
-  </view>
-  <!-- 文章列表 -->
-  <view class="container">
-    <!-- 列表template模板 -->
-    <template is="tempCommonList" data="{{postsList:postsList,listAdsuccess:listAdsuccess}}" />
-    <view style='display:{{isLoading?"block":"none"}}'>
-      <template is="tempLoading" />
-    </view>
-    <!-- 无更多文章提示 -->
-    <view class="loadingmore" style="display:{{floatDisplay}}">
+			<view class="swiper-tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="clickTab">年龄</view>
 
-      <view class="no-more" hidden="{{!isLastPage}}">- 无更多文章 -</view>
-    </view>
-    <!-- 版权信息template模板 -->
+			<view class="swiper-tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="clickTab">性别</view>
 
-    <view class="copyright" style="display:{{floatDisplay}}">
-      <navigator url="../../pages/about/about">关于我们</navigator>
-      <template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
-    </view>
-  </view>
+			<view class="swiper-tab-item {{currentTab==6?'active':''}}" data-current="6" bindtap="clickTab">种族</view>
+		</view>
+		<swiper current="{{currentTab}}" duration="300" bindchange="swiperTab" style='padding-top:50px;'>
+			<swiper-item>
+				<image src="https://wp.wetopay.com/map/covid.jpg" mode="aspectFill"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="https://wp.wetopay.com/map/1.png" mode="aspectFill"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="https://wp.wetopay.com/map/2.png" mode="aspectFill"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="https://wp.wetopay.com/map/3.png" mode="aspectFill"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="https://wp.wetopay.com/map/4.png" mode="aspectFill"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="https://wp.wetopay.com/map/5.png" mode="aspectFill"></image>
+			</swiper-item>
+			<swiper-item>
+				<image src="https://wp.wetopay.com/map/6.png" mode="aspectFill"></image>
+			</swiper-item>
+
+		</swiper>
+
+		<!-- 版权信息template模板 -->
+
+		<view class="copyright" style="display:{{floatDisplay}}">
+			<navigator url="../../pages/about/about">关于我们</navigator>
+			<template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
+		</view>
+	</view>
 </view>

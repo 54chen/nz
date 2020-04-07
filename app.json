@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/map/map",
+    
     "pages/index/index",
-
+    "pages/test/test",
     "pages/topic/topic",
+    "pages/map/map",
     "pages/detail/detail",
     "pages/logs/logs",
     "pages/page/page",
@@ -38,8 +39,8 @@
         "iconPath": "images/icon-home-off.png"
       },
       {
-        "pagePath": "pages/map/map",
-        "text": "数据",
+        "pagePath": "pages/topic/topic",
+        "text": "专题",
         "selectedIconPath": "images/icon-data-on.png",
         "iconPath": "images/icon-data-off.png"
       },

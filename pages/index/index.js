@@ -25,6 +25,12 @@ var topNav = config.getIndexNav;
 
 Page({
   data: {
+    //Tab
+    currentTab: 0,
+    used: 0, //已使用
+    noused: 0, //未使用
+    enddate: 0, //已过期
+
     postsList: [],
     postsShowSwiperList: [],
     isLastPage: false,
@@ -46,12 +52,12 @@ Page({
     isFirst: false, // 是否第一次打开,
     isLoading: false,
     showView: false,
-    showTitle:"新西兰华人信息平台",
+    showTitle: "新西兰华人信息平台",
 
     jzsj_num: [{
       name: 'div',
       attrs: {
-        class: 'div_class'       
+        class: 'div_class'
       },
       children: [{
         type: 'text',
@@ -223,6 +229,8 @@ Page({
       }]
     }],
   },
+
+
   formSubmit: function (e) {
     var url = '../list/list'
     var key = '';
@@ -244,6 +252,24 @@ Page({
         content: '请输入内容',
         showCancel: false,
       });
+    }
+  },
+  //滑动切换
+  swiperTab: function (e) {
+    var that = this;
+    that.setData({
+      currentTab: e.detail.current
+    });
+  },
+  //点击切换
+  clickTab: function (e) {
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
     }
   },
   onShareAppMessage: function () {
@@ -289,12 +315,80 @@ Page({
     }
 
   },
+  /**
+   * 监听图片加载成功时触发
+   */
+  imgload: function (e) {
+    this.setData({
+      'baseWidth': e.detail.width, //获取图片真实宽度
+      'baseHeight': e.detail.height, //获取图片真实高度
+      'scaleWidth': '100%', //给图片设置宽度
+      'scaleHeight': '100%' //给图片设置高度
+    })
+  },
+  /**
+   * 双手指触发开始 计算开始触发两个手指坐标的距离
+   */
+  touchstartCallback: function (e) {
+    // 单手指缩放开始，不做任何处理
+    if (e.touches.length == 1) return;
+    // 当两根手指放上去的时候，将距离(distance)初始化。
+    let xMove = e.touches[1].clientX - e.touches[0].clientX;
+    let yMove = e.touches[1].clientY - e.touches[0].clientY;
+    //计算开始触发两个手指坐标的距离
+    let distance = Math.sqrt(xMove * xMove + yMove * yMove);
+    this.setData({
+      'distance': distance,
+    })
+  },
+  /**
+   * 双手指移动   计算两个手指坐标和距离
+   */
+  touchmoveCallback: function (e) {
+    // 单手指缩放不做任何操作
+    if (e.touches.length == 1) return;
+    //双手指运动 x移动后的坐标和y移动后的坐标
+    let xMove = e.touches[1].clientX - e.touches[0].clientX;
+    let yMove = e.touches[1].clientY - e.touches[0].clientY;
+    //双手指运动新的 ditance
+    let distance = Math.sqrt(xMove * xMove + yMove * yMove);
+    //计算移动的过程中实际移动了多少的距离
+    let distanceDiff = distance - this.data.distance;
+    let newScale = this.data.scale + 0.005 * distanceDiff
+    // 为了防止缩放得太大，所以scale需要限制，同理最小值也是
+    if (newScale >= 1) {
+      newScale = 1
+      let scaleWidth = newScale * this.data.baseWidth + 'px'
+      let scaleHeight = newScale * this.data.baseHeight + 'px'
+      this.setData({
+        'distance': distance,
+        'scale': newScale,
+        'scaleWidth': scaleWidth,
+        'scaleHeight': scaleHeight,
+        'diff': distanceDiff
+      })
+    }
+    //为了防止缩放得太小，所以scale需要限制
+    if (newScale <= 0.3) {
+      newScale = 0.3
+      this.setData({
+        'distance': distance,
+        'scale': newScale,
+        'scaleWidth': '100%',
+        'scaleHeight': '100%',
+        'diff': distanceDiff
+      })
+    }
+  },
   onLoad: function (options) {
     var self = this;
     self.fetchTopYQInfo();
     self.fetchTopFivePosts();
     self.fetchPostsData(self.data);
 
+    self.setData({
+      dataimg: 'https://wp.wetopay.com/map/covid.jpg',
+    })
 
     // 判断用户是不是第一次打开，弹出添加到我的小程序提示
     var isFirstStorage = wx.getStorageSync('isFirst');
@@ -323,7 +417,7 @@ Page({
 
     this.fetchCategoriesData();
 
-    
+
   },
   onChangeShowState: function () {
     var that = this;
@@ -394,22 +488,22 @@ Page({
         jzsj_title[0].children[0].text = res.data.jzsj.title;
         jzsj_new[0].children[0].text = res.data.jzsj.compare;
 
-        // console.log("当前后台开关是：" + jzsj_num[0].children[0].text);
-        // console.log("1当前前台开关是：" + res.data.showView);
-        
-        if (jzsj_num[0].children[0].text == 0){
-          // console.log("打开")
-          // console.log("后台平台title：" + jzsj_title[0].children[0].text);
+        console.log("当前后台开关是：" + jzsj_num[0].children[0].text);
+        console.log("1当前前台开关是：" + self.data.showView);
+
+        if (jzsj_num[0].children[0].text == 0) {
+          console.log("打开")
+          console.log("后台平台title：" + jzsj_title[0].children[0].text);
           this.setData({
-            showView:true,
+            showView: true,
             showTitle: jzsj_title[0].children[0].text
           });
-          // console.log("后台平台title设置showTitle,showTitle：" + self.data.showTitle);
+          console.log("后台平台title设置showTitle,showTitle：" + self.data.showTitle);
           wx.setNavigationBarTitle({
             title: self.data.showTitle,
           })
         }
-        // console.log("2当前前台开关是：" + res.data.showView);
+        console.log("2当前前台开关是：" + self.data.showView);
 
         self.setData({
           xcqz_num: xcqz_num,
@@ -431,7 +525,7 @@ Page({
           jzsj_num: jzsj_num,
           jzsj_title: jzsj_title,
           jzsj_new: jzsj_new,
-          showTitle:jzsj_title,
+          showTitle: jzsj_title,
 
         });
       }
@@ -461,24 +555,23 @@ Page({
       }
       var getCategoriesRequest = wxRequest.getRequest(Api.getCategories(ids, openid));
       getCategoriesRequest.then(response => {
-        if (response.statusCode === 200) {
-          self.setData({
-            floatDisplay: "block",
-            categoriesList: self.data.categoriesList.concat(response.data.map(function (item) {
-              if (typeof (item.category_thumbnail_image) == "undefined" || item.category_thumbnail_image == "") {
-                item.category_thumbnail_image = "../../images/website.png";
+          if (response.statusCode === 200) {
+            self.setData({
+              floatDisplay: "block",
+              categoriesList: self.data.categoriesList.concat(response.data.map(function (item) {
+                if (typeof (item.category_thumbnail_image) == "undefined" || item.category_thumbnail_image == "") {
+                  item.category_thumbnail_image = "../../images/website.png";
 
-              }
-              // item.subimg = "subscription.png";
-              return item;
-            })),
-          });
-        }
-        else {
-          console.log(response);
-        }
+                }
+                // item.subimg = "subscription.png";
+                return item;
+              })),
+            });
+          } else {
+            console.log(response);
+          }
 
-      })
+        })
         // .then(res=>{
         //     if (self.data.openid) {                
         //         setTimeout(function () {
@@ -522,7 +615,7 @@ Page({
         showerror: "block",
         floatDisplay: "none"
       });
-    }).finally(function () { });
+    }).finally(function () {});
   },
 
   //获取文章列表数据
@@ -537,12 +630,16 @@ Page({
         postsList: []
       });
     };
-    self.setData({ isLoading: true })
+    self.setData({
+      isLoading: true
+    })
     var getCategoriesRequest = wxRequest.getRequest(Api.getCategoriesIds());
     getCategoriesRequest.then(res => {
       if (!res.data.Ids == "") {
         data.categories = res.data.Ids;
-        self.setData({ categories: res.data.Ids })
+        self.setData({
+          categories: res.data.Ids
+        })
 
       }
 
@@ -620,7 +717,9 @@ Page({
         })
         .finally(function (response) {
           wx.hideLoading();
-          self.setData({ isLoading: false })
+          self.setData({
+            isLoading: false
+          })
           wx.stopPullDownRefresh();
         });
 
@@ -768,7 +867,9 @@ Page({
         if (!('scope.userInfo' in authSetting)) {
           //if (util.isEmptyObject(authSetting)) {
           console.log('第一次授权');
-          self.setData({ isLoginPopup: true })
+          self.setData({
+            isLoginPopup: true
+          })
 
         } else {
           console.log('不是第一次授权', authSetting);
@@ -796,8 +897,7 @@ Page({
                 }
               }
             })
-          }
-          else {
+          } else {
             auth.getUsreInfo(null);
           }
         }
@@ -814,10 +914,14 @@ Page({
 
   },
   closeLoginPopup() {
-    this.setData({ isLoginPopup: false });
+    this.setData({
+      isLoginPopup: false
+    });
   },
   openLoginPopup() {
-    this.setData({ isLoginPopup: true });
+    this.setData({
+      isLoginPopup: true
+    });
   },
   getOpenId(data) {
     var url = Api.getOpenidUrl();
@@ -831,8 +935,7 @@ Page({
         app.globalData.openid = response.data.openid;
         app.globalData.isGetOpenid = true;
 
-      }
-      else {
+      } else {
         console.log(response);
       }
     }).then(res => {

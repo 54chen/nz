@@ -10,18 +10,52 @@
 
 @import "../../lib/weui.wxss";
 
-.page-section{
+.page-section {
   margin-bottom: 20rpx;
 }
-.flex-wrp {display: flex;}
-.bc_grey {background: #9F9F9F;width:5px; height: 80px;}
-.bc_green {background: #a8c37d;width:5px; height: 80px;}
-.bc_red {background: #e49594;width:5px; height: 80px;}
-.bc_blue {background: #1aa3ed;width:5px; height: 80px;}
-.bc_orange {background: #ed8a2d;width:5px; height: 80px;}
-.bc_white {background: white;width:100px; height: 80px;}
+
+.flex-wrp {
+  display: flex;
+}
+
+.bc_grey {
+  background: #9F9F9F;
+  width: 5px;
+  height: 80px;
+}
+
+.bc_green {
+  background: #a8c37d;
+  width: 5px;
+  height: 80px;
+}
+
+.bc_red {
+  background: #e49594;
+  width: 5px;
+  height: 80px;
+}
+
+.bc_blue {
+  background: #1aa3ed;
+  width: 5px;
+  height: 80px;
+}
+
+.bc_orange {
+  background: #ed8a2d;
+  width: 5px;
+  height: 80px;
+}
+
+.bc_white {
+  background: white;
+  width: 100px;
+  height: 80px;
+}
+
 /* 轮播图 */
-swiper {
+/* swiper {
   position: relative;
   height: 460rpx;
   background: #fff;
@@ -48,30 +82,66 @@ swiper image {
   bottom: 0;
   left: 0;
   right: 0;
+} */
+
+.swiper-tab {
+  width: 100%;
+  border-bottom: 2rpx solid #ccc;
+  text-align: center;
+  height: 80rpx;
+  line-height: 88rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  font-size: 14px;
+  
+}
+
+.swiper-tab-item {
+  width: 30%;
+  color: #434343;
+  
+}
+
+.active {
+  color: #F65959;
+  border-bottom: 4rpx solid #F65959;
+}
+
+swiper {
+  height: 80vh;
+  
+}
+
+.gd-tab {
+  position: fixed;
+  top: 300;
+  z-index: 999;
+  background: #fff;
 }
 
 /* 图标导航 */
-.nav-box{
-display: flex;
-padding: 24rpx 0;
-background: #fff;
-justify-content:space-around;
+.nav-box {
+  display: flex;
+  padding: 24rpx 0;
+  background: #fff;
+  justify-content: space-around;
 }
 
-.nav-item{
-text-align: center;
+.nav-item {
+  text-align: center;
 }
 
-.nav-item image{
-width: 88rpx;
-height: 88rpx;
+.nav-item image {
+  width: 88rpx;
+  height: 88rpx;
 }
 
-.nav-item text{
-line-height: 20rpx;
-font-size: 28rpx;
-color: #4c4c4c;
-font-weight: 500;
+.nav-item text {
+  line-height: 20rpx;
+  font-size: 28rpx;
+  color: #4c4c4c;
+  font-weight: 500;
 }
 
 /* 搜索 */
@@ -215,15 +285,16 @@ font-weight: 500;
   top: -10rpx;
 }
 
-.bright789_view_hide{
- display: none;
-}
-.bright789_view_show{
- display: block;
+.bright789_view_hide {
+  display: none;
 }
 
-.bright789-text{
- font-size: 40rpx;
- line-height: 40px;
- color: #ff0000;
+.bright789_view_show {
+  display: block;
+}
+
+.bright789-text {
+  font-size: 40rpx;
+  line-height: 40px;
+  color: #ff0000;
 }
