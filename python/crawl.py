@@ -35,7 +35,7 @@ def get_pic():
         res.encoding = 'utf-8';
         tree = html.fromstring(res.text);
         name = tree.xpath("//img");
-        i = 0;
+        i = 10;
         for n in name:
             content = HTMLParser().unescape(html.tostring(n).decode()); 
             if (content.find('images/our-work')<=0):
@@ -48,5 +48,30 @@ def get_pic():
                 print(pic_file);
             download_file(pic_file,str(i)+'.png');
  
+
+def get_num():
+    url = 'https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-current-situation/covid-19-current-cases';
+    res = requests.get(url);
+    res.encoding = 'utf-8';
+    tree = html.fromstring(res.text);
+    name = tree.xpath("//table[@class='table-style-two']");
+    content = HTMLParser().unescape(html.tostring(name[0]).decode());
+
+    soup = BeautifulSoup(content,'html.parser');
+    result = [];
+    result.append(soup("caption")[0].text);
+
+    for row in soup("tr"):
+        r = []
+        r.append(row("th")[0].text);
+        for td in row("td"):
+            r.append(td.text);
+        result.append(r);
+    rs = json.dumps(result);
+    with open('./data.json', 'w') as outfile:
+        json.dump(rs, outfile)
+
+    print(rs);
 get_excel();
 get_pic();
+get_num();
