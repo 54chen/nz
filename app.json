@@ -1,9 +1,8 @@
 {
   "pages": [
-    
     "pages/index/index",
-    "pages/test/test",
     "pages/topic/topic",
+    "pages/test/test",
     "pages/map/map",
     "pages/detail/detail",
     "pages/logs/logs",
@@ -31,18 +30,18 @@
     "downloadFile": 10000
   },
   "tabBar": {
-    "list": [
+    "list": [      
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
-        "selectedIconPath": "images/icon-home-on.png",
-        "iconPath": "images/icon-home-off.png"
+        "text": "数据",
+        "selectedIconPath": "images/icon-data-on.png",
+        "iconPath": "images/icon-data-off.png"
       },
       {
         "pagePath": "pages/topic/topic",
         "text": "专题",
-        "selectedIconPath": "images/icon-data-on.png",
-        "iconPath": "images/icon-data-off.png"
+        "selectedIconPath": "images/icon-home-on.png",
+        "iconPath": "images/icon-home-off.png"
       },
       {
         "pagePath": "pages/readlog/readlog",

@@ -170,7 +170,7 @@ Page({
       }
   },
   onShareAppMessage: function () {
-      var title = "分享我在“" + config.getWebsiteName + "浏览、评论、点赞、鼓励的文章";
+      var title = "分享我在“" + config.getWebsiteName + "浏览、评论、点赞的文章";
       var path = "pages/readlog/readlog";
       return {
           title: title,

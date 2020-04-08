@@ -198,7 +198,7 @@ swiper {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 130rpx;
+  height: 60rpx;
   padding: 0 24rpx;
   background: #fff;
 }

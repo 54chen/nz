@@ -11,6 +11,8 @@
  */-->
 
 <template name="tempHeader">
-  <image src="../../images/level4.jpg" style="width:100%;height:67px"></image>
+  <view class="header">
+    <image src="../../images/logo700.png" style="height:302rpx;width:302rpx"></image>
+  </view>
 </template>
 <!-- header end -->

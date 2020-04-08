@@ -84,7 +84,7 @@ Page({
         url = 'pages/webpage/webpage?url=' + url;
         console.log(options.webViewUrl);
         return {
-            title: '分享"' + config.getWebsiteName + '"的文章' + self.data.title,
+            title: self.data.title,
             path: url,
             success: function (res) {
                 // 转发成功
