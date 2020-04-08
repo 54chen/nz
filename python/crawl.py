@@ -6,6 +6,12 @@ from lxml import html
 from html.parser import HTMLParser
 from bs4 import BeautifulSoup
 
+def read_all_part(filename):
+    with open(filename) as f:
+        lines = f.readlines()
+    return lines
+
+
 def download_file(file,filename):
         if (file != ''):
                 res = requests.get(file);
@@ -58,20 +64,36 @@ def get_num():
     content = HTMLParser().unescape(html.tostring(name[0]).decode());
 
     soup = BeautifulSoup(content,'html.parser');
-    result = [];
-    result.append(soup("caption")[0].text);
-
+    lines = read_all_part("./YQinfo.json.tpl");
+    tpl = ''
+    for line in lines:
+        tpl += line
+        
+    tpl = tpl.replace('$update',soup("caption")[0].text);
     for row in soup("tr"):
-        r = []
-        r.append(row("th")[0].text);
-        for td in row("td"):
-            r.append(td.text);
-        result.append(r);
-    rs = json.dumps(result);
-    with open('./data.json', 'w') as outfile:
-        json.dump(rs, outfile)
+        if (row("th")[0].text == 'Number of confirmed cases in New Zealand'):
+            tpl = tpl.replace('$qtotal',row("td")[0].text);
+            tpl = tpl.replace('$qcompare',row("td")[1].text);
+        
+        if (row("th")[0].text == 'Number of probable cases'):
+            tpl = tpl.replace('$ytotal',row("td")[0].text);
+            tpl = tpl.replace('$ycompare',row("td")[1].text);
 
-    print(rs);
-get_excel();
-get_pic();
+        if (row("th")[0].text == 'Number of recovered cases'):
+            tpl = tpl.replace('$ztotal',row("td")[0].text);
+            tpl = tpl.replace('$zcompare',row("td")[1].text);
+
+        if (row("th")[0].text == 'Number of deaths'):
+            tpl = tpl.replace('$dead',row("td")[0].text);
+            tpl = tpl.replace('$dcompare',row("td")[1].text);
+        
+    tpl = tpl.replace('+ ','+0');
+    #rs = json.dumps(tpl);
+    #print(tpl);
+    with open('./YQinfo.json', 'w') as outfile:
+        outfile.write(tpl);
+        #   json.dump(tpl, outfile)
+
+#get_excel();
+#get_pic();
 get_num();
