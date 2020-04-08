@@ -17,21 +17,14 @@
 	<view>点击收藏小程序 ↑</view>
 	<text>及时准确掌握新西兰疫情信息</text>
 </view>
-
-
-<view style="display:{{showallDisplay}}">
-	<!-- 图标导航和搜索 -->
-	<view style="display:{{floatDisplay}}">
-
-		<!-- 精选栏目 -->
-		<view class="bright789_view_hide{{showView?'bright789_view_show':''}}">
-			<!-- <view class='common-subtitle'>
-        <view class='common-subtitle-left'>专题栏目</view>
-        <view class='common-subtitle-right'>同心协力，抗击疫情。</view>
-      </view> -->
+<view class="section">
+	<view class="section__title">
+		<image src="../../images/level4.jpg" style="width:100%;height:67px"></image>
+	</view>
+	<view class="flex-wrp" style="flex-direction:column;">
+		<view class="flex-item">
 			<!-- 专题栏目 -->
 			<view class="nav-box">
-
 				<block wx:for="{{categoriesList}}" wx:key="id">
 					<view class="nav-item" catchtap="onNavRedirect" id="{{item.id}}" data-redicttype="{{item.redirecttype}}" data-url="{{item.url}}" data-appid="{{item.appid}}" data-extraData="{{item.extraData}}">
 						<view>
@@ -42,43 +35,36 @@
 						</view>
 					</view>
 				</block>
-
 			</view>
-
 		</view>
-
-
-
-
-
-		<!-- 搜索 -->
-		<form catchsubmit="formSubmit" catchreset="formReset" id="search-form">
-			<view class="search-box">
-				<input value="" id="search-input" name="input" confirm-type="search" class="search-input" placeholder="搜索你感兴趣的内容..." bindconfirm="formSubmit"></input>
-				<button class="search-button" form-type="submit" size="mini" plain="true">
-					<icon type="search" color="#959595" size="16" />
-				</button>
+		<view class="flex-item">
+			<!-- 搜索 -->
+			<form catchsubmit="formSubmit" catchreset="formReset" id="search-form">
+				<view class="search-box">
+					<input value="" id="search-input" name="input" confirm-type="search" class="search-input" placeholder="搜索你感兴趣的内容..." bindconfirm="formSubmit"></input>
+					<button class="search-button" form-type="submit" size="mini" plain="true">
+						<icon type="search" color="#959595" size="16" />
+					</button>
+				</view>
+			</form>
+		</view>
+		<view class="flex-item">
+			<!-- 列表template模板 -->
+			<template is="tempCommonList" data="{{postsList:postsList,listAdsuccess:listAdsuccess}}" />
+			<view style='display:{{isLoading?"block":"none"}}'>
+				<template is="tempLoading" />
 			</view>
-		</form>
+			<!-- 无更多文章提示 -->
+			<view class="loadingmore" style="display:{{floatDisplay}}">
 
-	</view>
-	<!-- 文章列表 -->
-	<view class="container">
-		<!-- 列表template模板 -->
-		<template is="tempCommonList" data="{{postsList:postsList,listAdsuccess:listAdsuccess}}" />
-		<view style='display:{{isLoading?"block":"none"}}'>
-			<template is="tempLoading" />
-		</view>
-		<!-- 无更多文章提示 -->
-		<view class="loadingmore" style="display:{{floatDisplay}}">
-
-			<view class="no-more" hidden="{{!isLastPage}}">- 无更多文章 -</view>
-		</view>
-		<!-- 版权信息template模板 -->
-
-		<view class="copyright" style="display:{{floatDisplay}}">
-			<navigator url="../../pages/about/about">关于我们</navigator>
-			<template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
+				<view class="no-more" hidden="{{!isLastPage}}">- 无更多文章 -</view>
+			</view>
 		</view>
 	</view>
+</view>
+<!-- 版权信息template模板 -->
+
+<view class="copyright" style="display:{{floatDisplay}}">
+	<navigator url="../../pages/about/about">关于我们</navigator>
+	<template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
 </view>

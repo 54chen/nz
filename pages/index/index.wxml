@@ -11,98 +11,94 @@
 <import src="../../templates/copyright.wxml" />
 <import src="../../templates/loading.wxml" />
 
-
 <!-- 首次进入引导添加到“我的小程序” -->
 <view class="addMyMiniapp" wx:if="{{isFirst}}" catchtap="shutAddMyMiniapp">
 	<view>点击收藏小程序 ↑</view>
 	<text>及时准确掌握新西兰疫情信息</text>
 </view>
-
-<view class="bright789_view_hide{{showView?'bright789_view_show':''}}">
-	<image src="../../images/level4.jpg" style="width:100%;height:67px"></image>
-	<view class='common-subtitle'>
-		<view class='common-subtitle-left'>最新数据</view>
-		<view class='common-subtitle-right'>
-			<rich-text nodes="{{jzsj_num}}"></rich-text>
-			<rich-text nodes="{{jzsj_new}}"></rich-text>
-		</view>
+<view class="section">
+	<view class="section__title">
+		<image src="../../images/level4.jpg" style="width:100%;height:67px"></image>
 	</view>
-	<view class="flex-wrp" style="flex-direction:row;">
-		<view class="flex-item bc_white" style="width:10px"></view>
-		<view class="flex-item bc_white" style="width:100px">
-			<rich-text nodes="{{xcqz_num}}"></rich-text>
-			<rich-text nodes="{{xcqz_title}}"></rich-text>
-			<rich-text nodes="{{xcqz_new}}"></rich-text>
+	<view class="flex-wrp" style="flex-direction:column;">
+		<view class="flex-item">
+			<view class='common-subtitle'>
+				<view class='common-subtitle-left'>最新数据</view>
+				<view class='common-subtitle-right'>
+					<rich-text nodes="{{jzsj_num}}"></rich-text>
+					<rich-text nodes="{{jzsj_new}}"></rich-text>
+				</view>
+			</view>
+			<view class="flex-wrp" style="flex-direction:row;">
+				<view class="flex-item bc_white" style="width:10px"></view>
+				<view class="flex-item bc_white" style="width:100px">
+					<rich-text nodes="{{xcqz_num}}"></rich-text>
+					<rich-text nodes="{{xcqz_title}}"></rich-text>
+					<rich-text nodes="{{xcqz_new}}"></rich-text>
+				</view>
+				<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
+				<view class="flex-item bc_white" style="width:100px">
+					<rich-text nodes="{{ljqz_num}}"></rich-text>
+					<rich-text nodes="{{ljqz_title}}"></rich-text>
+					<rich-text nodes="{{ljqz_new}}"></rich-text>
+				</view>
+				<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
+				<view class="flex-item bc_white" style="width:100px">
+					<rich-text nodes="{{ljzy_num}}"></rich-text>
+					<rich-text nodes="{{ljzy_title}}"></rich-text>
+					<rich-text nodes="{{ljzy_new}}"></rich-text>
+				</view>
+				<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
+				<view class="flex-item bc_white" style="width:100px">
+					<rich-text nodes="{{ljsw_num}}"></rich-text>
+					<rich-text nodes="{{ljsw_title}}"></rich-text>
+					<rich-text nodes="{{ljsw_new}}"></rich-text>
+				</view>
+			</view>
 		</view>
-		<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
-		<view class="flex-item bc_white" style="width:100px">
-			<rich-text nodes="{{ljqz_num}}"></rich-text>
-			<rich-text nodes="{{ljqz_title}}"></rich-text>
-			<rich-text nodes="{{ljqz_new}}"></rich-text>
+		<view class="flex-item">
+			<view class="swiper-tab">
+				<view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">地图</view>
+				<view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">地区</view>
+				<view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">流行</view>
+				<view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">新增</view>
+				<view class="swiper-tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="clickTab">年龄</view>
+				<view class="swiper-tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="clickTab">性别</view>
+				<view class="swiper-tab-item {{currentTab==6?'active':''}}" data-current="6" bindtap="clickTab">种族</view>
+			</view>
 		</view>
-		<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
-		<view class="flex-item bc_white" style="width:100px">
-			<rich-text nodes="{{ljzy_num}}"></rich-text>
-			<rich-text nodes="{{ljzy_title}}"></rich-text>
-			<rich-text nodes="{{ljzy_new}}"></rich-text>
-		</view>
-		<view class="flex-item bc_grey" style="width:2px;height:70px"></view>
-		<view class="flex-item bc_white" style="width:100px">
-			<rich-text nodes="{{ljsw_num}}"></rich-text>
-			<rich-text nodes="{{ljsw_title}}"></rich-text>
-			<rich-text nodes="{{ljsw_new}}"></rich-text>
+		<view class="flex-item">
+
+			<swiper current="{{currentTab}}" duration="300" bindchange="swiperTab" style='padding-top:50px;'>
+				<swiper-item>
+					<image src="https://wp.wetopay.com/map/12.png" mode="widthFix" style="width:730rpx"></image>
+				</swiper-item>
+				<swiper-item>
+					<image src="https://wp.wetopay.com/map/11.png" mode="widthFix" style="width:730rpx"></image>
+				</swiper-item>
+				<swiper-item>
+					<image src="https://wp.wetopay.com/map/13.png" mode="widthFix" style="width:730rpx"></image>
+				</swiper-item>
+				<swiper-item>
+					<image src="https://wp.wetopay.com/map/14.png" mode="widthFix" style="width:730rpx"></image>
+				</swiper-item>
+				<swiper-item>
+					<image src="https://wp.wetopay.com/map/15.png" mode="widthFix" style="width:730rpx"></image>
+				</swiper-item>
+				<swiper-item>
+					<image src="https://wp.wetopay.com/map/16.png" mode="widthFix" style="width:730rpx"></image>
+				</swiper-item>
+				<swiper-item>
+					<image src="https://wp.wetopay.com/map/17.png" mode="widthFix" style="width:730rpx"></image>
+				</swiper-item>
+
+			</swiper>
 		</view>
 	</view>
 </view>
-<view style="display:{{showallDisplay}}">
+<!-- 版权信息template模板 -->
 
-
-
-
-
-	<view class="swiper-tab gd-tab">
-		<view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">地图</view>
-		<view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">地区</view>
-		<view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="clickTab">流行</view>
-
-		<view class="swiper-tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="clickTab">新增</view>
-
-		<view class="swiper-tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="clickTab">年龄</view>
-
-		<view class="swiper-tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="clickTab">性别</view>
-
-		<view class="swiper-tab-item {{currentTab==6?'active':''}}" data-current="6" bindtap="clickTab">种族</view>
-	</view>
-	<swiper current="{{currentTab}}" duration="300" bindchange="swiperTab" style='padding-top:50px;'>
-		<swiper-item>
-			<image src="https://wp.wetopay.com/map/12.png" mode="widthFix" style="width:730rpx"></image>
-		</swiper-item>
-		<swiper-item>
-			<image src="https://wp.wetopay.com/map/11.png" mode="widthFix" style="width:730rpx"></image>
-		</swiper-item>
-		<swiper-item>
-			<image src="https://wp.wetopay.com/map/13.png" mode="widthFix" style="width:730rpx"></image>
-		</swiper-item>
-		<swiper-item>
-			<image src="https://wp.wetopay.com/map/14.png" mode="widthFix" style="width:730rpx"></image>
-		</swiper-item>
-		<swiper-item>
-			<image src="https://wp.wetopay.com/map/15.png" mode="widthFix" style="width:730rpx"></image>
-		</swiper-item>
-		<swiper-item>
-			<image src="https://wp.wetopay.com/map/16.png" mode="widthFix" style="width:730rpx"></image>
-		</swiper-item>
-		<swiper-item>
-			<image src="https://wp.wetopay.com/map/17.png" mode="widthFix" style="width:730rpx"></image>
-		</swiper-item>
-
-	</swiper>
-
-	<!-- 版权信息template模板 -->
-
-	<view class="copyright" style="display:{{floatDisplay}}">
-		<navigator url="../../pages/about/about">关于我们</navigator>
-		<template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
-	</view>
-
+<view class="copyright" style="display:{{floatDisplay}}">
+	<navigator url="../../pages/about/about">关于我们</navigator>
+	<template is="tempCopyright" data="{{webSiteName:webSiteName,domain:domain}}" />
 </view>

@@ -257,7 +257,8 @@
                 <button class="comment-button touch-active" formType="submit">发送</button>
               </view>
               <!-- 更多按钮 -->
-              <image src="../../images/entry-more.png" class="comment_icon_more" catchtap="ShowHideMenu" mode=""></image>
+              <button class="comment-button touch-active" catchtap="ShowHideMenu">分享</button>
+              <!-- <image src="../../images/entry-more.png" class="comment_icon_more" catchtap="ShowHideMenu" mode=""></image> -->
 
             </view>
 

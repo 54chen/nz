@@ -115,8 +115,8 @@ swiper {
 
 .gd-tab {
   position: fixed;
-  top: 300;
-  z-index: 999;
+  /* top: 0; */
+  /* z-index: 999; */
   background: #fff;
 }
 
@@ -297,4 +297,12 @@ swiper {
   font-size: 40rpx;
   line-height: 40px;
   color: #ff0000;
+}
+
+.page-section {
+  margin-bottom: 20rpx;
+}
+
+.flex-wrp {
+  display: flex;
 }
