@@ -90,10 +90,10 @@ def get_num():
     tpl = tpl.replace('+ ','+0');
     #rs = json.dumps(tpl);
     #print(tpl);
-    with open('./YQinfo.json', 'w') as outfile:
+    with open('../nzcovid/YQinfo.json', 'w') as outfile:
         outfile.write(tpl);
         #   json.dump(tpl, outfile)
 
-#get_excel();
-#get_pic();
+get_excel();
+get_pic();
 get_num();
