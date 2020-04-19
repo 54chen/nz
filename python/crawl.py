@@ -83,7 +83,7 @@ def get_num():
             tpl = tpl.replace('$ztotal',row("td")[0].text);
             tpl = tpl.replace('$zcompare',row("td")[1].text);
 
-        if (row("th")[0].text == 'Number of deaths'):
+        if (row("th")[0].text.find('Number of deaths')!=-1):
             tpl = tpl.replace('$dead',row("td")[0].text);
             tpl = tpl.replace('$dcompare',row("td")[1].text);
         
